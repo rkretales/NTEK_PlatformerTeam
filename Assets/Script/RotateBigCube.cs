@@ -80,8 +80,6 @@ public class RotateBigCube : MonoBehaviour
                 case Vector2 swipe when DownRightSwipe(swipe):
                     target.transform.Rotate(-90, 0, 0, Space.World);
                     break;
-                default:
-                    break;
             }
         }
     }
@@ -110,6 +108,7 @@ public class RotateBigCube : MonoBehaviour
                 default:
                     break;
             }
+            
         }
     }
 
