@@ -11,17 +11,13 @@ public class RotateBigCube : MonoBehaviour
     private Vector3 mouseDelta;
     public GameObject target;
     [SerializeField]private float speed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
     {
         Swipe();
         Drag();
+        OnGUI();
     }
 
     void Drag()
@@ -42,6 +38,7 @@ public class RotateBigCube : MonoBehaviour
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, target.transform.rotation, step);
             }
         }
+        
         previousMousePosition = Input.mousePosition;
     }
 
@@ -51,7 +48,6 @@ public class RotateBigCube : MonoBehaviour
         {
             // get the 2D position of the first mouse click
             firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            // Debug.Log(firstPressPos);
         }
         if(Input.GetMouseButtonUp(0))
         {
@@ -64,30 +60,55 @@ public class RotateBigCube : MonoBehaviour
             //normalize the 2D vector
             currentSwipe.Normalize();
 
-            if (LeftSwipe(currentSwipe))
+            switch (currentSwipe)
             {
-                target.transform.Rotate(0, 90, 0, Space.World);
+                case Vector2 swipe when LeftSwipe(swipe):
+                    target.transform.Rotate(0, swipe.x < 0 ? 90 : -90, 0, Space.World);
+                    break;
+                case Vector2 swipe when RightSwipe(swipe):
+                    target.transform.Rotate(0, swipe.x < 0 ? 90 : -90, 0, Space.World);
+                    break;
+                case Vector2 swipe when UpLeftSwipe(swipe):
+                    target.transform.Rotate(90, 0, 0, Space.World);
+                    break;
+                case Vector2 swipe when UpRightSwipe(swipe):
+                    target.transform.Rotate(0, 0, -90, Space.World);
+                    break;
+                case Vector2 swipe when DownLeftSwipe(swipe):
+                    target.transform.Rotate(0, 0, 90, Space.World);
+                    break;
+                case Vector2 swipe when DownRightSwipe(swipe):
+                    target.transform.Rotate(-90, 0, 0, Space.World);
+                    break;
             }
-            else if (RightSwipe(currentSwipe))
+        }
+    }
+
+
+    void OnGUI()
+    {
+        Event e = Event.current;
+         
+        if (e != null && e.isKey && e.type == EventType.KeyDown)
+        {
+            switch (e.keyCode)
             {
-                target.transform.Rotate(0, -90, 0, Space.World);
+                case KeyCode.LeftArrow:
+                    target.transform.Rotate(0, 90, 0, Space.World);
+                    break;
+                case KeyCode.RightArrow:
+                    target.transform.Rotate(0, -90, 0, Space.World);
+                    break;
+                case KeyCode.UpArrow:
+                    target.transform.Rotate(0, 0, -90, Space.World);
+                    break;
+                case KeyCode.DownArrow:
+                    target.transform.Rotate(0, 0, 90, Space.World);
+                    break;
+                default:
+                    break;
             }
-            else if (UpLeftSwipe(currentSwipe))
-            {
-                target.transform.Rotate(90, 0, 0, Space.World);
-            }
-            else if (UpRightSwipe(currentSwipe))
-            {
-                target.transform.Rotate(0, 0, -90, Space.World);
-            }
-            else if (DownLeftSwipe(currentSwipe))
-            {
-                target.transform.Rotate(0, 0, 90, Space.World);
-            }
-            else if (DownRightSwipe(currentSwipe))
-            {
-                target.transform.Rotate(-90, 0, 0, Space.World);
-            }
+            
         }
     }
 
