@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+
 public class OptionsUI : MonoBehaviour
 {
     [SerializeField] private GameObject MainMenuUI;
@@ -51,13 +52,6 @@ public class OptionsUI : MonoBehaviour
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
     }
-
-    public void OpenOptions()
-    {
-        MainMenuUI.SetActive(false);
-        OptionsUIHolder.SetActive(true);
-    }
-
     public void OptionReturn()
     {
         MainMenuUI.SetActive(true);
