@@ -22,7 +22,7 @@ public class RotateBigCube : MonoBehaviour
 
     void Drag()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             // While the mouse is held down the cube can be move around its central axis to provide visual feedback
             mouseDelta = Input.mousePosition - previousMousePosition;
@@ -44,12 +44,12 @@ public class RotateBigCube : MonoBehaviour
 
     void Swipe()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(1))
         {
             // get the 2D position of the first mouse click
             firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
-        if(Input.GetMouseButtonUp(0))
+        if(Input.GetMouseButtonUp(1))
         {
             // get the 2D position of the second mouse click
             secondPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
