@@ -18,7 +18,7 @@ public class OptionsUI : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
-        FPSDropdown.value = PlayerPrefs.GetInt("FPSLimitValue");
+        //FPSDropdown.value = PlayerPrefs.GetInt("FPSLimitValue");
 
         QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("qualityValue"));
         graphicsQuality.value = PlayerPrefs.GetInt("qualityValue");

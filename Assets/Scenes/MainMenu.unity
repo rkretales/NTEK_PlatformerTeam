@@ -2155,6 +2155,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 728834981}
+        m_TargetAssemblyTypeName: MoreMountains.Tools.MMSoundManager, MoreMountains.Tools
+        m_MethodName: SetVolumeMaster
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &777566967
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2481,13 +2493,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 25275072}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: MoreMountains.Feedbacks.MMF_Player, MoreMountains.Feedbacks
-          m_MethodName: PlayFeedbacks
+          m_MethodName: 
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_ObjectArgumentAssemblyTypeName: 
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -6134,10 +6146,9 @@ MonoBehaviour:
   MainMenuUI: {fileID: 483872806}
   OptionsUIHolder: {fileID: 629611259}
   audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
-  resolutionDropdown: {fileID: 1883339347}
+  FPSDropdown: {fileID: 0}
   graphicsQuality: {fileID: 47671260}
   volumeValue: 0
-  qualityIndexValue: 0
   volumeSlider: {fileID: 777566966}
 --- !u!4 &1987054699
 Transform:
