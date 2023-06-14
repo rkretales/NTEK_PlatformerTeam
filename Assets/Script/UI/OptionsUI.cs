@@ -14,13 +14,12 @@ public class OptionsUI : MonoBehaviour {
     public Slider volumeSlider;
 
     private void Start() {
-        Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
-        //FPSDropdown.value = PlayerPrefs.GetInt("FPSLimitValue");
-
+        Application.targetFrameRate = SaveMaster.GetInt("FPSLimit");
+        FPSDropdown.value = SaveMaster.GetInt("FPSLimitValue");
         QualitySettings.SetQualityLevel(SaveMaster.GetInt("qualityValue"));
         graphicsQuality.value = SaveMaster.GetInt("qualityValue");
 
-        volumeSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+        volumeSlider.value = SaveMaster.GetFloat("MasterVolume");
     }
 
     public void OptionReturn() {
@@ -31,26 +30,21 @@ public class OptionsUI : MonoBehaviour {
     public void SetVolume(float volume) {
         volumeValue = volume;
         audioMixer.SetFloat("MasterVolume", volumeValue);
-        SaveMaster.SetFloat("MasterVolume", volumeValue);
-        PlayerPrefs.SetFloat("MasterVolume", volumeValue);
     }
 
     public void SetQuality(int qualityIndex) {
-        PlayerPrefs.SetInt("qualityValue", qualityIndex);
-        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("qualityValue"));
+        QualitySettings.SetQualityLevel("qualityValue", qualityIndex);
     }
 
     public void SetFPSLimit(int FPSIndex) {
         PlayerPrefs.SetInt("FPSLimitValue", FPSIndex);
         switch(FPSIndex) {
             case 0:
-                PlayerPrefs.SetInt("FPSLimit", 30);
-                Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
+                Application.targetFrameRate = 30;
                 break;
 
             case 1:
-                PlayerPrefs.SetInt("FPSLimit", 60);
-                Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
+                Application.targetFrameRate = 60;
                 break;
         }
     }
