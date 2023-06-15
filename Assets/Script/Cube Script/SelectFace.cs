@@ -22,7 +22,7 @@ public class SelectFace : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !CubeState.autoRotating)
         {
             // read the current state of the cube
-            Debug.Log("Select click!");            
+            // Debug.Log("Select click!");            
             readCube.ReadState();
 
             // raycast from the mouse towards the cube to see if a face is hit  
@@ -30,7 +30,7 @@ public class SelectFace : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit, 1000f, layerMask))
             {
-                Debug.Log("Ray Hit!");
+                // Debug.Log("Ray Hit!");
                 GameObject face = hit.collider.gameObject;
                 // Make a list of all the sides (lists of face GameObjects)
                 List<List<GameObject>> cubeSides = new List<List<GameObject>>()
@@ -49,7 +49,7 @@ public class SelectFace : MonoBehaviour
                     {
                         //Pick it up
                         cubeState.PickUp(cubeSide);
-                        Debug.Log("Pick Click");
+                        // Debug.Log("Pick Click");
                         //start the side rotation logic
                         cubeSide[4].transform.parent.GetComponent<PivotRotation>().Rotate(cubeSide);
                     }

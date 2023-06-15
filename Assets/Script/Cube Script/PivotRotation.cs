@@ -28,11 +28,11 @@ public class PivotRotation : MonoBehaviour
     {
         if (dragging && !autoRotating)
         {
-            Debug.Log("First Click");
+            // Debug.Log("First Click");
             SpinSide(activeSide);
             if (Input.GetMouseButtonUp(0))
             {
-                Debug.Log("Second Click");
+                // Debug.Log("Second Click");
                 dragging = false;
                 RotateToRightAngle();
             }
@@ -51,7 +51,7 @@ public class PivotRotation : MonoBehaviour
         Vector3 mouseOffset = (Input.mousePosition - mouseRef);        
         if (side == cubeState.up)
         {
-            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+            rotation.y = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
         }
         if (side == cubeState.down)
         {
@@ -59,16 +59,16 @@ public class PivotRotation : MonoBehaviour
         }
         if (side == cubeState.left)
         {
-            rotation.z = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+            rotation.z = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
         }
         if (side == cubeState.right)
         {
             rotation.z = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
         }
-        if (side == cubeState.front)
-        {
-            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
-        }
+        // if (side == cubeState.front)
+        // {
+        //     rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+        // }
         if (side == cubeState.back)
         {
             rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
@@ -124,8 +124,8 @@ public class PivotRotation : MonoBehaviour
             transform.localRotation = targetQuaternion;
 
             // Debug statements to check activeSide count and pivot
-            Debug.Log("activeSide count: " + activeSide.Count);
-            Debug.Log("Pivot: " + transform.parent);
+            // Debug.Log("activeSide count: " + activeSide.Count);
+            // Debug.Log("Pivot: " + transform.parent);
 
             // unparent the little cubes
             cubeState.PutDown(activeSide, transform.parent);
