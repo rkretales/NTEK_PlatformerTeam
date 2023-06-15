@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PivotRotation : MonoBehaviour
+// These Assemblies gives access to MoreMountain's Scripts
+using MoreMountains.Tools;
+using MoreMountains.Feedbacks;
+
+public class   PivotRotation : MonoBehaviour
 {
     private List<GameObject> activeSide;
     private Vector3 localForward;
@@ -15,12 +19,21 @@ public class PivotRotation : MonoBehaviour
     private Quaternion targetQuaternion;
     private ReadCube readCube;
     private CubeState cubeState;
+    
+    [Header("Feedbacks Player")]
+    [Tooltip("AUDIO>Cube Sfx should be added here to make the Sfx work")]
+    // use MoreMountain's scripting to add the MMFPlayer to script
+    [SerializeField] private MMF_Player SwishSfx;
        
     // Start is called before the first frame update
     void Start()
     {
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
+        
+        SwishSfx = GameObject.Find("Cube Sfx").GetComponent<MMF_Player>();
+        // We initialize the Sfx here to be able to play it.
+        SwishSfx.Initialization();
     }
 
     // Late Update is called once per frame at the end
@@ -88,6 +101,8 @@ public class PivotRotation : MonoBehaviour
         dragging = true;
         // Create a vector to rotate around
         localForward = Vector3.zero - side[4].transform.parent.transform.localPosition;
+        // This calls the PlaySfx when the player rotates a face of the cube.
+        PlaySfx();
     }
 
     public void StartAutoRotate(List<GameObject> side, float angle)
@@ -97,6 +112,8 @@ public class PivotRotation : MonoBehaviour
         targetQuaternion = Quaternion.AngleAxis(angle, localForward) * transform.localRotation;
         activeSide = side;
         autoRotating = true;
+        // This calls the PlaySfx when the player rotates a face of the cube.
+        PlaySfx();
     }
 
 
@@ -134,5 +151,11 @@ public class PivotRotation : MonoBehaviour
             autoRotating = false;
             dragging = false;                                                               
         }
-    }         
+    }
+    
+    // Audio Scripts ~RA
+    public void PlaySfx()
+    {
+        SwishSfx.PlayFeedbacks(); 
+    }
 }
