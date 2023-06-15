@@ -112,6 +112,26 @@ public class RotateBigCube : MonoBehaviour
         }
     }
 
+    public void UpKey()
+    {
+        target.transform.Rotate(0, 0, -90, Space.World);
+    }
+
+    public void DownKey()
+    {
+        target.transform.Rotate(0, 0, 90, Space.World);
+    }
+
+    public void LeftKey()
+    {
+        target.transform.Rotate(0, 90, 0, Space.World);
+    }
+
+    public void RightKey()
+    {
+        target.transform.Rotate(0, -90, 0, Space.World);
+    }
+
     bool LeftSwipe(Vector2 swipe)
     {
         return currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f;
