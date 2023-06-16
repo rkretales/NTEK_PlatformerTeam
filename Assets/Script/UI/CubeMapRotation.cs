@@ -21,14 +21,12 @@ public class CubeMapRotation : MonoBehaviour
         transform.Rotate(_verticalMovement, _horizontalMovement, 0);
     }
 
-    public virtual void Move(Vector2 newMovement)
-    {
-        if (!_axisBased)
-        {
-            _horizontalMovement = newMovement.x;
-            _verticalMovement = newMovement.y;
-            // Debug.Log(newMovement.x);
-        }
+    public virtual void Move(Vector2 newMovement) {
+        if(_axisBased) return;
+        
+        _horizontalMovement = newMovement.x;
+        _verticalMovement = newMovement.y;
+        // Debug.Log(newMovement.x);
     }
 
     public virtual void SetHorizontalAxis(float value)

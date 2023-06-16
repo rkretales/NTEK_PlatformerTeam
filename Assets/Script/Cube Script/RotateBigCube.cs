@@ -25,14 +25,14 @@ public class RotateBigCube : MonoBehaviour
     [SerializeField] private MMF_Player WhooshSfx;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         Swipe();
         Drag();
         OnGUI();
     }
-
-    void Drag()
+    
+    private void Drag()
     {
         if (Input.GetMouseButton(1))
         {
@@ -54,7 +54,7 @@ public class RotateBigCube : MonoBehaviour
         previousMousePosition = Input.mousePosition;
     }
 
-    void Swipe()
+    private void Swipe()
     {
         if(Input.GetMouseButtonDown(1))
         {
