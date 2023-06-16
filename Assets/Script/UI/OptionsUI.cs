@@ -33,7 +33,7 @@ public class OptionsUI : MonoBehaviour {
     }
 
     public void SetQuality(int qualityIndex) {
-        QualitySettings.SetQualityLevel("qualityValue", qualityIndex);
+        QualitySettings.SetQualityLevel(qualityIndex);
     }
 
     public void SetFPSLimit(int FPSIndex) {
