@@ -65,10 +65,10 @@ public class PivotRotation : MonoBehaviour
         {
             rotation.z = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
         }
-        // if (side == cubeState.front)
-        // {
-        //     rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
-        // }
+        if (side == cubeState.front)
+        {
+            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+        }
         if (side == cubeState.back)
         {
             rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
