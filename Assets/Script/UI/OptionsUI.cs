@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using Lowscope.Saving;
+using UnityEngine.Serialization;
 
 public class OptionsUI : MonoBehaviour {
     [SerializeField] private GameObject MainMenuUI;
@@ -10,8 +11,15 @@ public class OptionsUI : MonoBehaviour {
     public AudioMixer audioMixer;
     public TMP_Dropdown FPSDropdown;
     public TMP_Dropdown graphicsQuality;
-    public float volumeValue;
-    public Slider volumeSlider;
+    private float masterVolumeValue;
+    private float sfxVolumeValue;
+    private float musicVolumeValue;
+    
+    [Tooltip("The Volume sliders should be attached here from the New Options")]
+    [Header("Volume Sliders")]
+    [SerializeField] Slider masterVolumeSlider;
+    [SerializeField] Slider sfxVolumeSlider;
+    [SerializeField] Slider musicVolumeSlider;
 
     private void Start() {
         Application.targetFrameRate = SaveMaster.GetInt("FPSLimit");
@@ -19,19 +27,35 @@ public class OptionsUI : MonoBehaviour {
         QualitySettings.SetQualityLevel(SaveMaster.GetInt("qualityValue"));
         graphicsQuality.value = SaveMaster.GetInt("qualityValue");
 
-        volumeSlider.value = SaveMaster.GetFloat("MasterVolume");
+        masterVolumeSlider.value = SaveMaster.GetFloat(key: "MasterVolume");
+        sfxVolumeSlider.value = SaveMaster.GetFloat(key: "SfxVolume");
+        musicVolumeSlider.value = SaveMaster.GetFloat(key: "MusicVolume");
+        
     }
 
     public void OptionReturn() {
         MainMenuUI.SetActive(true);
         OptionsUIHolder.SetActive(false);
     }
-
-    public void SetVolume(float volume) {
-        volumeValue = volume;
-        audioMixer.SetFloat("MasterVolume", volumeValue);
+#region VolumeSettings
+    public void SetMasterVolume(float masterVolume)
+    {
+        masterVolumeValue = masterVolume;
+        audioMixer.SetFloat("MasterVolume", masterVolumeValue);
     }
-
+    
+    public void SetSfxVolume(float sfxVolume)
+    {
+        sfxVolumeValue = sfxVolume;
+        audioMixer.SetFloat("SfxVolume", sfxVolumeValue);
+    }
+    
+    public void SetMusicVolume(float musicVolume)
+    {
+        musicVolumeValue = musicVolume;
+        audioMixer.SetFloat("MusicVolume", musicVolumeValue);
+    }
+#endregion
     public void SetQuality(int qualityIndex) {
         QualitySettings.SetQualityLevel(qualityIndex);
     }
