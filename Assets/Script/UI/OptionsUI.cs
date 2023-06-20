@@ -33,7 +33,15 @@ public class OptionsUI : MonoBehaviour {
         
     }
 
+    private void SaveVolumeSettings()
+    {
+        SaveMaster.SetFloat("MasterVolume", masterVolumeSlider.value);
+        SaveMaster.SetFloat("SfxVolume", sfxVolumeSlider.value);
+        SaveMaster.SetFloat("MusicVolume", musicVolumeSlider.value);
+    }
+
     public void OptionReturn() {
+        SaveVolumeSettings(); // Save volume settings before returning to the main menu
         MainMenuUI.SetActive(true);
         OptionsUIHolder.SetActive(false);
     }
