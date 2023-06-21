@@ -17,18 +17,17 @@ public class PivotRotation : MonoBehaviour
     private CubeState cubeState;
        
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
     }
 
     // Late Update is called once per frame at the end
-    void LateUpdate()
+    private void LateUpdate()
     {
         if (dragging && !autoRotating)
         {
-            // Debug.Log("First Click");
             SpinSide(activeSide);
             if (Input.GetMouseButtonUp(0))
             {
@@ -134,5 +133,5 @@ public class PivotRotation : MonoBehaviour
             autoRotating = false;
             dragging = false;                                                               
         }
-    }         
+    }     
 }

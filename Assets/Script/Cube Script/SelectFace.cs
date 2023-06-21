@@ -10,14 +10,14 @@ public class SelectFace : MonoBehaviour
 
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0) && !CubeState.autoRotating)
         {
