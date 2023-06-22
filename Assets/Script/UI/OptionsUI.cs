@@ -1,63 +1,82 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using Lowscope.Saving;
+using UnityEngine.Serialization;
 
-public class OptionsUI : MonoBehaviour
-{
+public class OptionsUI : MonoBehaviour {
     [SerializeField] private GameObject MainMenuUI;
-    [SerializeField] private GameObject OptionsUIHolder;       
-    public AudioMixer audioMixer;  
-    public TMPro.TMP_Dropdown FPSDropdown; 
-    public TMPro.TMP_Dropdown graphicsQuality;
-    public float volumeValue;
-    public Slider volumeSlider;
+    [SerializeField] private GameObject OptionsUIHolder;
+    public AudioMixer audioMixer;
+    public TMP_Dropdown FPSDropdown;
+    public TMP_Dropdown graphicsQuality;
+    private float masterVolumeValue;
+    private float sfxVolumeValue;
+    private float musicVolumeValue;
+    
+    [Tooltip("The Volume sliders should be attached here from the New Options")]
+    [Header("Volume Sliders")]
+    [SerializeField] Slider masterVolumeSlider;
+    [SerializeField] Slider sfxVolumeSlider;
+    [SerializeField] Slider musicVolumeSlider;
 
-    void Start()
-    {
-        Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
-        FPSDropdown.value = PlayerPrefs.GetInt("FPSLimitValue");
+    private void Start() {
+        Application.targetFrameRate = SaveMaster.GetInt("FPSLimit");
+        FPSDropdown.value = SaveMaster.GetInt("FPSLimitValue");
+        QualitySettings.SetQualityLevel(SaveMaster.GetInt("qualityValue"));
+        graphicsQuality.value = SaveMaster.GetInt("qualityValue");
 
-        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("qualityValue"));
-        graphicsQuality.value = PlayerPrefs.GetInt("qualityValue");
-
-        volumeSlider.value = PlayerPrefs.GetFloat("MasterVolume");
+        masterVolumeSlider.value = SaveMaster.GetFloat(key: "MasterVolume");
+        sfxVolumeSlider.value = SaveMaster.GetFloat(key: "SfxVolume");
+        musicVolumeSlider.value = SaveMaster.GetFloat(key: "MusicVolume");
+        
     }
-    public void OptionReturn()
+
+    private void SaveVolumeSettings()
     {
+        SaveMaster.SetFloat("MasterVolume", masterVolumeSlider.value);
+        SaveMaster.SetFloat("SfxVolume", sfxVolumeSlider.value);
+        SaveMaster.SetFloat("MusicVolume", musicVolumeSlider.value);
+    }
+
+    public void OptionReturn() {
+        SaveVolumeSettings(); // Save volume settings before returning to the main menu
         MainMenuUI.SetActive(true);
         OptionsUIHolder.SetActive(false);
     }
-
-    public void SetVolume (float volume)
+#region VolumeSettings
+    public void SetMasterVolume(float masterVolume)
     {
-        volumeValue = volume;
-        audioMixer.SetFloat("MasterVolume", volumeValue);
-        PlayerPrefs.SetFloat("MasterVolume", volumeValue); 
+        masterVolumeValue = masterVolume;
+        audioMixer.SetFloat("MasterVolume", masterVolumeValue);
+    }
+    
+    public void SetSfxVolume(float sfxVolume)
+    {
+        sfxVolumeValue = sfxVolume;
+        audioMixer.SetFloat("SfxVolume", sfxVolumeValue);
+    }
+    
+    public void SetMusicVolume(float musicVolume)
+    {
+        musicVolumeValue = musicVolume;
+        audioMixer.SetFloat("MusicVolume", musicVolumeValue);
+    }
+#endregion
+    public void SetQuality(int qualityIndex) {
+        QualitySettings.SetQualityLevel(qualityIndex);
     }
 
-    public void SetQuality (int qualityIndex)
-    {
-        PlayerPrefs.SetInt("qualityValue", qualityIndex); 
-        QualitySettings.SetQualityLevel(PlayerPrefs.GetInt("qualityValue"));
-    }
-
-    public void SetFPSLimit (int FPSIndex)
-    {
+    public void SetFPSLimit(int FPSIndex) {
         PlayerPrefs.SetInt("FPSLimitValue", FPSIndex);
-        switch (FPSIndex)
-        {
+        switch(FPSIndex) {
             case 0:
-                PlayerPrefs.SetInt("FPSLimit", 30); 
-                Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
+                Application.targetFrameRate = 30;
                 break;
+
             case 1:
-                PlayerPrefs.SetInt("FPSLimit", 60); 
-                Application.targetFrameRate = PlayerPrefs.GetInt("FPSLimit");
-                break;
-            default:
+                Application.targetFrameRate = 60;
                 break;
         }
     }

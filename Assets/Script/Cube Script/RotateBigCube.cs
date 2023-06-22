@@ -1,7 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// gives access to MoreMountain's Scripts
+using MoreMountains.Tools;
+using MoreMountains.Feedbacks;
 public class RotateBigCube : MonoBehaviour
 {
     private Vector2 firstPressPos;
@@ -11,6 +15,16 @@ public class RotateBigCube : MonoBehaviour
     private Vector3 mouseDelta;
     public GameObject target;
     [SerializeField]private float speed;
+ 
+    [Header("Feedbacks Player")]
+    [Tooltip("AUDIO>Cube Sfx should be added here to make the Sfx work")]
+    [SerializeField] private MMF_Player Sfx;
+
+    private void Start()
+    {
+        Sfx = GameObject.Find("ViewMovement").GetComponent<MMF_Player>();
+        Sfx.Initialization();
+    }
 
     // Update is called once per frame
     void Update()
@@ -64,21 +78,27 @@ public class RotateBigCube : MonoBehaviour
             {
                 case Vector2 swipe when LeftSwipe(swipe):
                     target.transform.Rotate(0, swipe.x < 0 ? 90 : -90, 0, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when RightSwipe(swipe):
                     target.transform.Rotate(0, swipe.x < 0 ? 90 : -90, 0, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when UpLeftSwipe(swipe):
                     target.transform.Rotate(90, 0, 0, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when UpRightSwipe(swipe):
                     target.transform.Rotate(0, 0, -90, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when DownLeftSwipe(swipe):
                     target.transform.Rotate(0, 0, 90, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when DownRightSwipe(swipe):
                     target.transform.Rotate(-90, 0, 0, Space.World);
+                    PlaySfx();
                     break;
             }
         }
@@ -161,4 +181,11 @@ public class RotateBigCube : MonoBehaviour
     {
         return currentSwipe.y < 0 && currentSwipe.x > 0f;
     }
+
+    #region Audio Methods
+    public void PlaySfx()
+    {
+        Sfx.PlayFeedbacks();
+    }
+    #endregion
 }

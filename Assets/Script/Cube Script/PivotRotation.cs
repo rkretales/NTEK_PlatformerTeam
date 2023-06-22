@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// gives access to MoreMountain's Scripts
+using MoreMountains.Tools;
+using MoreMountains.Feedbacks;
 public class PivotRotation : MonoBehaviour
 {
     private List<GameObject> activeSide;
@@ -15,12 +18,20 @@ public class PivotRotation : MonoBehaviour
     private Quaternion targetQuaternion;
     private ReadCube readCube;
     private CubeState cubeState;
+    
+    [Header("Feedbacks Player")]
+    [Tooltip("AUDIO>Cube Sfx should be added here to make the Sfx work")]
+    [SerializeField] private MMF_Player Sfx;
        
     // Start is called before the first frame update
     private void Start()
     {
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
+        
+        // readies the sfx for use
+        Sfx = GameObject.Find("CubeMovement").GetComponent<MMF_Player>();
+        Sfx.Initialization();
     }
 
     // Late Update is called once per frame at the end
@@ -39,7 +50,7 @@ public class PivotRotation : MonoBehaviour
         if (autoRotating)
         {
             AutoRotate();
-        } 
+        }
     }
 
     private void SpinSide(List<GameObject> side)
@@ -87,6 +98,7 @@ public class PivotRotation : MonoBehaviour
         dragging = true;
         // Create a vector to rotate around
         localForward = Vector3.zero - side[4].transform.parent.transform.localPosition;
+        PlaySfx();
     }
 
     public void StartAutoRotate(List<GameObject> side, float angle)
@@ -133,5 +145,14 @@ public class PivotRotation : MonoBehaviour
             autoRotating = false;
             dragging = false;                                                               
         }
+        PlaySfx();
     }     
+    
+    
+    #region Audio Methods
+    public void PlaySfx()
+    {
+        Sfx.PlayFeedbacks();
+    }
+    #endregion
 }
