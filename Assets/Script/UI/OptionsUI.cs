@@ -10,8 +10,9 @@ public class OptionsUI : MonoBehaviour {
     [SerializeField] private GameObject MainMenuUI;
     [SerializeField] private GameObject OptionsUIHolder;
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private TMP_Dropdown FPSDropdown;
-    [SerializeField] private TMP_Dropdown graphicsQuality;
+    [SerializeField] private Button[] FPSLimit;
+    [SerializeField] private Button[] graphicsQuality;
+    private int FPSLimitValue;
     
     [Tooltip("The Volume sliders should be attached here from the New Options")]
     [Header("Volume Sliders")]
@@ -22,10 +23,8 @@ public class OptionsUI : MonoBehaviour {
     private MMSoundManager _soundManager;
 
     private void Start() {
-        //Application.targetFrameRate = SaveMaster.GetInt("FPSLimit");
-       // FPSDropdown.value = SaveMaster.GetInt("FPSLimitValue");
-        //QualitySettings.SetQualityLevel(SaveMaster.GetInt("qualityValue"));
-        //graphicsQuality.value = SaveMaster.GetInt("qualityValue");
+        Application.targetFrameRate = SaveMaster.GetInt("FPSLimitValue");
+        QualitySettings.SetQualityLevel(SaveMaster.GetInt("qualityValue"));
         _soundManager = FindObjectOfType(typeof(MMSoundManager)) as MMSoundManager;
         masterVolumeSlider.value = SaveMaster.GetFloat(key: "MasterVolume");
         sfxVolumeSlider.value = SaveMaster.GetFloat(key: "SfxVolume");
@@ -67,16 +66,18 @@ public class OptionsUI : MonoBehaviour {
 #endregion
     public void SetQuality(int qualityIndex) {
         QualitySettings.SetQualityLevel(qualityIndex);
+        SaveMaster.SetInt("qualityValue", qualityIndex);
     }
 
     public void SetFPSLimit(int fpsIndex) {
-        PlayerPrefs.SetInt("FPSLimitValue", fpsIndex);
-        Application.targetFrameRate = fpsIndex switch {
+        int newFPSLimit = fpsIndex switch {
             0 => 30,
-            
             1 => 60,
-            
             _ => Application.targetFrameRate
         };
+
+        SaveMaster.SetInt("FPSLimitValue", newFPSLimit);
+        FPSLimitValue = newFPSLimit;
+        Application.targetFrameRate = newFPSLimit;
     }
 }

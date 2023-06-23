@@ -12,8 +12,8 @@ public class PivotRotation : MonoBehaviour
     private Vector3 mouseRef;
     private bool dragging = false;
     private bool autoRotating = false;
-    private float sensitivity = 0.4f;
-    private float speed = 500f;
+    private float sensitivity = 0.2f;
+    private float speed = 800f;
     private Vector3 rotation;
     private Quaternion targetQuaternion;
     private ReadCube readCube;

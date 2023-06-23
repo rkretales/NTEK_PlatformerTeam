@@ -774,7 +774,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 378635221}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1987054698}
+        m_TargetAssemblyTypeName: OptionsUI, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &378635221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2580,7 +2592,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 967694692}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1987054698}
+        m_TargetAssemblyTypeName: OptionsUI, Assembly-CSharp
+        m_MethodName: SetFPSLimit
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &967694692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3703,7 +3727,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1238812577}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1987054698}
+        m_TargetAssemblyTypeName: OptionsUI, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1238812577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4739,7 +4775,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1574711473}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1987054698}
+        m_TargetAssemblyTypeName: OptionsUI, Assembly-CSharp
+        m_MethodName: SetFPSLimit
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1574711473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6376,8 +6424,13 @@ MonoBehaviour:
   MainMenuUI: {fileID: 483872806}
   OptionsUIHolder: {fileID: 238342795}
   audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
-  FPSDropdown: {fileID: 0}
-  graphicsQuality: {fileID: 0}
+  FPSLimit:
+  - {fileID: 967694691}
+  - {fileID: 1574711472}
+  graphicsQuality:
+  - {fileID: 2055156018}
+  - {fileID: 1238812576}
+  - {fileID: 378635220}
   masterVolumeSlider: {fileID: 183953425}
   sfxVolumeSlider: {fileID: 1269435047}
   musicVolumeSlider: {fileID: 2112066713}
@@ -6685,7 +6738,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2055156019}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1987054698}
+        m_TargetAssemblyTypeName: OptionsUI, Assembly-CSharp
+        m_MethodName: SetQuality
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2055156019
 MonoBehaviour:
   m_ObjectHideFlags: 0
