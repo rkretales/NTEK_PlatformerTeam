@@ -532,6 +532,7 @@ GameObject:
   m_Component:
   - component: {fileID: 183953424}
   - component: {fileID: 183953425}
+  - component: {fileID: 183953426}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -606,10 +607,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 688444018}
   m_HandleRect: {fileID: 1385817029}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -625,6 +626,27 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &183953426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 183953423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487bb7f14f728c74ca3bfc0020509b6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Track: 3
+  MinVolume: 0
+  MaxVolume: 1
+  Mode: 1
+  ChangeModeOnTrackFade: 1
+  ChangeModeOnMute: 1
+  ChangeModeOnUnmute: 1
+  ChangeModeOnTrackVolumeChange: 0
+  ModeSwitchBufferTime: 0.1
 --- !u!1 &238342795
 GameObject:
   m_ObjectHideFlags: 0
@@ -1920,7 +1942,8 @@ Transform:
   m_LocalPosition: {x: 553.35754, y: 233.626, z: -4.1304026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1819832461}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3848,10 +3871,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 1402665497}
   m_HandleRect: {fileID: 1207991213}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -3898,7 +3921,7 @@ Transform:
   - {fileID: 2145160289}
   - {fileID: 25275071}
   m_Father: {fileID: 1486149149}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1331983346
 GameObject:
@@ -4329,7 +4352,6 @@ RectTransform:
   m_LocalScale: {x: 0.5864583, y: 0.5864583, z: 0.5864583}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1819832461}
   - {fileID: 1320556286}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -6024,11 +6046,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1819832460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.441843, y: -141.31267, z: -7.0429597}
-  m_LocalScale: {x: 1.705151, y: 1.705151, z: 1.705151}
+  m_LocalPosition: {x: 397, y: 223.1803, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1486149149}
+  m_Father: {fileID: 728834982}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1819832462
@@ -6967,8 +6989,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 1546356973}
   m_HandleRect: {fileID: 2015021846}
   m_Direction: 0
-  m_MinValue: 0
-  m_MaxValue: 1
+  m_MinValue: -80
+  m_MaxValue: 0
   m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
