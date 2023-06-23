@@ -53,13 +53,13 @@ public class OptionsUI : MonoBehaviour {
         audioMixer.SetFloat("MasterVolume", masterVolumeSlider.value);
     }
     
-    public void SetSfxVolume(float sfxVolume)
+    public void SetSfxVolume()
     {
         _soundManager.SetVolumeSfx(sfxVolumeSlider.value);
         audioMixer.SetFloat("SfxVolume", sfxVolumeSlider.value);
     }
     
-    public void SetMusicVolume(float musicVolume)
+    public void SetMusicVolume()
     {
         _soundManager.SetVolumeMusic(musicVolumeSlider.value);
         audioMixer.SetFloat("MusicVolume", musicVolumeSlider.value);
