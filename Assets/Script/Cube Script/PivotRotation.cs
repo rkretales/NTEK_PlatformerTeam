@@ -12,12 +12,15 @@ public class PivotRotation : MonoBehaviour
     private Vector3 mouseRef;
     private bool dragging = false;
     private bool autoRotating = false;
-    private float sensitivity = 0.2f;
+    private float sensitivity = 0.4f;
     private float speed = 800f;
     private Vector3 rotation;
     private Quaternion targetQuaternion;
     private ReadCube readCube;
     private CubeState cubeState;
+    private Automate automate;
+    private InGameUI ui;
+    
     
     [Header("Feedbacks Player")]
     [Tooltip("AUDIO>Cube Sfx should be added here to make the Sfx work")]
@@ -26,6 +29,8 @@ public class PivotRotation : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        ui = FindObjectOfType<InGameUI>();
+        automate = FindObjectOfType<Automate>();
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
         
@@ -37,9 +42,11 @@ public class PivotRotation : MonoBehaviour
     // Late Update is called once per frame at the end
     private void LateUpdate()
     {
-        if (dragging && !autoRotating)
+        if (dragging && !autoRotating && !automate.shuffling && !ui.isPaused)
         {
+            automate.shuffling = false;
             SpinSide(activeSide);
+            PlaySfx();
             if (Input.GetMouseButtonUp(0))
             {
                 // Debug.Log("Second Click");
@@ -50,6 +57,19 @@ public class PivotRotation : MonoBehaviour
         if (autoRotating)
         {
             AutoRotate();
+            PlaySfx();
+        }
+    }
+
+    private void Update()
+    {
+        if(automate.shuffling)
+        {
+            speed = 600f;
+        }
+        else
+        {
+            speed = 800f;
         }
     }
 
@@ -97,8 +117,7 @@ public class PivotRotation : MonoBehaviour
         mouseRef = Input.mousePosition;
         dragging = true;
         // Create a vector to rotate around
-        localForward = Vector3.zero - side[4].transform.parent.transform.localPosition;
-        PlaySfx();
+        localForward = Vector3.zero - side[4].transform.localPosition;
     }
 
     public void StartAutoRotate(List<GameObject> side, float angle)
@@ -145,7 +164,6 @@ public class PivotRotation : MonoBehaviour
             autoRotating = false;
             dragging = false;                                                               
         }
-        PlaySfx();
     }     
     
     

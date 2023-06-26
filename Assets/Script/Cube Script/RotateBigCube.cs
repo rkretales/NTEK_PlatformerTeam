@@ -13,6 +13,7 @@ public class RotateBigCube : MonoBehaviour
     private Vector2 currentSwipe;
     private Vector3 previousMousePosition;
     private Vector3 mouseDelta;
+    private InGameUI ui;
     public GameObject target;
     [SerializeField]private float speed;
  
@@ -22,6 +23,7 @@ public class RotateBigCube : MonoBehaviour
 
     private void Start()
     {
+        ui = FindObjectOfType<InGameUI>();
         Sfx = GameObject.Find("ViewMovement").GetComponent<MMF_Player>();
         Sfx.Initialization();
     }
@@ -29,9 +31,13 @@ public class RotateBigCube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Swipe();
-        Drag();
-        OnGUI();
+        if (!ui.isPaused)
+        {
+            Swipe();
+            Drag();
+            OnGUI();
+        }
+
     }
 
     void Drag()
@@ -144,12 +150,12 @@ public class RotateBigCube : MonoBehaviour
 
     public void LeftKey()
     {
-        target.transform.Rotate(0, 90, 0, Space.World);
+        target.transform.Rotate(0, -90, 0, Space.World);
     }
 
     public void RightKey()
     {
-        target.transform.Rotate(0, -90, 0, Space.World);
+        target.transform.Rotate(0, 90, 0, Space.World);
     }
 
     bool LeftSwipe(Vector2 swipe)
