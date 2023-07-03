@@ -44,7 +44,6 @@ public class PivotRotation : MonoBehaviour
     {
         if (dragging && !autoRotating && !automate.shuffling && !ui.isPaused)
         {
-            automate.shuffling = false;
             SpinSide(activeSide);
             PlaySfx();
             if (Input.GetMouseButtonUp(0))

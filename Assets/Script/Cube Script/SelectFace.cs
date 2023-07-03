@@ -6,12 +6,14 @@ public class SelectFace : MonoBehaviour
 {
     private CubeState cubeState;
     private ReadCube readCube;
+    private InGameUI ui;
     private int layerMask = 1 << 0;
 
     
     // Start is called before the first frame update
     private void Start()
     {
+        ui = FindObjectOfType<InGameUI>();
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
     }
@@ -19,7 +21,7 @@ public class SelectFace : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !CubeState.autoRotating)
+        if (Input.GetMouseButtonDown(0) && !CubeState.autoRotating && !ui.isPaused)
         {
             // read the current state of the cube
             // Debug.Log("Select click!");            

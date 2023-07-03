@@ -26,6 +26,7 @@ public class Automate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Debug.Log(shuffling);
         if (moveList.Count > 0  && !CubeState.autoRotating && CubeState.started && Once)
         {
             Once = false;
@@ -35,6 +36,12 @@ public class Automate : MonoBehaviour
             // remove the move at the first index
             moveList.Remove(moveList[0]);
         }
+        
+        if (moveList.Count == 0)
+        {
+            shuffling = false;
+        }
+        
     }
 
     public void Shuffle()
@@ -61,6 +68,7 @@ public class Automate : MonoBehaviour
         Invoke("Delayer", 0.4f);
         readCube.ReadState();
         CubeState.autoRotating = true;
+        shuffling = true;
         if (move == "U")
         {
             RotateSide(cubeState.up, -90);
