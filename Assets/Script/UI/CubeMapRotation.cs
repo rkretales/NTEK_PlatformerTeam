@@ -9,24 +9,20 @@ public class CubeMapRotation : MonoBehaviour
     protected float _horizontalMovement;
     protected bool _axisBased = false;
 
-    // Start is called before the first frame update
-    protected virtual void Start()
-    {
-
-    }
-
     // Update is called once per frame
     protected virtual void Update()
     {
         transform.Rotate(_verticalMovement, _horizontalMovement, 0);
     }
 
-    public virtual void Move(Vector2 newMovement) {
-        if(_axisBased) return;
-        
-        _horizontalMovement = newMovement.x;
-        _verticalMovement = newMovement.y;
-        // Debug.Log(newMovement.x);
+    public virtual void Move(Vector2 newMovement)
+    {
+        if (!_axisBased)
+        {
+            _horizontalMovement = newMovement.x * speed;
+            _verticalMovement = newMovement.y * speed;
+            // Debug.Log(newMovement.x);
+        }
     }
 
     public virtual void SetHorizontalAxis(float value)

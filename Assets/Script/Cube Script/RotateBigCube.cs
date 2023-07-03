@@ -3,12 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// These Assemblies gives access to MoreMountain's Scripts
+// gives access to MoreMountain's Scripts
 using MoreMountains.Tools;
 using MoreMountains.Feedbacks;
-
-// THIS SCRIPT MOVES THE CUBE AROUND TO SEE OTHER FACES
-
 public class RotateBigCube : MonoBehaviour
 {
     private Vector2 firstPressPos;
@@ -16,20 +13,31 @@ public class RotateBigCube : MonoBehaviour
     private Vector2 currentSwipe;
     private Vector3 previousMousePosition;
     private Vector3 mouseDelta;
+    private InGameUI ui;
     public GameObject target;
     [SerializeField]private float speed;
-    
+ 
     [Header("Feedbacks Player")]
     [Tooltip("AUDIO>Cube Sfx should be added here to make the Sfx work")]
-    // use MoreMountain's scripting to add the MMFPlayer to script
-    [SerializeField] private MMF_Player WhooshSfx;
+    [SerializeField] private MMF_Player Sfx;
+
+    private void Start()
+    {
+        ui = FindObjectOfType<InGameUI>();
+        Sfx = GameObject.Find("ViewMovement").GetComponent<MMF_Player>();
+        Sfx.Initialization();
+    }
 
     // Update is called once per frame
     private void Update()
     {
-        Swipe();
-        Drag();
-        OnGUI();
+        if (!ui.isPaused)
+        {
+            Swipe();
+            Drag();
+            OnGUI();
+        }
+
     }
     
     private void Drag()
@@ -76,43 +84,30 @@ public class RotateBigCube : MonoBehaviour
             {
                 case Vector2 swipe when LeftSwipe(swipe):
                     target.transform.Rotate(0, swipe.x < 0 ? 90 : -90, 0, Space.World);
-                    // This calls the PlaySfx when the player rotates a face of the cube.
                     PlaySfx();
                     break;
                 case Vector2 swipe when RightSwipe(swipe):
-                    // This calls the PlaySfx when the player rotates a face of the cube.
-                    PlaySfx();
                     target.transform.Rotate(0, swipe.x < 0 ? 90 : -90, 0, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when UpLeftSwipe(swipe):
-                    // This calls the PlaySfx when the player rotates a face of the cube.
-                    PlaySfx();
                     target.transform.Rotate(90, 0, 0, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when UpRightSwipe(swipe):
-                    // This calls the PlaySfx when the player rotates a face of the cube.
-                    PlaySfx();
                     target.transform.Rotate(0, 0, -90, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when DownLeftSwipe(swipe):
-                    // This calls the PlaySfx when the player rotates a face of the cube.
-                    PlaySfx();
                     target.transform.Rotate(0, 0, 90, Space.World);
+                    PlaySfx();
                     break;
                 case Vector2 swipe when DownRightSwipe(swipe):
-                    // This calls the PlaySfx when the player rotates a face of the cube.
-                    PlaySfx();
                     target.transform.Rotate(-90, 0, 0, Space.World);
+                    PlaySfx();
                     break;
-            } // Developer RA Note: We might need to refactor this switch statement since nag copy paste ako ng maraming beses for the playSfx(); nakakatamad hahahha
+            }
         }
-    }
-    
-    public void PlaySfx()
-    {
-        WhooshSfx = GameObject.Find("ViewMovement Sfx").GetComponent<MMF_Player>();
-        WhooshSfx.Initialization();
-        WhooshSfx.PlayFeedbacks(); 
     }
 
 
@@ -155,12 +150,12 @@ public class RotateBigCube : MonoBehaviour
 
     public void LeftKey()
     {
-        target.transform.Rotate(0, 90, 0, Space.World);
+        target.transform.Rotate(0, -90, 0, Space.World);
     }
 
     public void RightKey()
     {
-        target.transform.Rotate(0, -90, 0, Space.World);
+        target.transform.Rotate(0, 90, 0, Space.World);
     }
 
     bool LeftSwipe(Vector2 swipe)
@@ -192,5 +187,11 @@ public class RotateBigCube : MonoBehaviour
     {
         return currentSwipe.y < 0 && currentSwipe.x > 0f;
     }
-}
 
+    #region Audio Methods
+    public void PlaySfx()
+    {
+        Sfx.PlayFeedbacks();
+    }
+    #endregion
+}

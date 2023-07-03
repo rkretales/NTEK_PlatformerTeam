@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// These Assemblies gives access to MoreMountain's Scripts
+// gives access to MoreMountain's Scripts
 using MoreMountains.Tools;
 using MoreMountains.Feedbacks;
-
-public class   PivotRotation : MonoBehaviour
+public class PivotRotation : MonoBehaviour
 {
     private List<GameObject> activeSide;
     private Vector3 localForward;
@@ -14,35 +13,40 @@ public class   PivotRotation : MonoBehaviour
     private bool dragging = false;
     private bool autoRotating = false;
     private float sensitivity = 0.4f;
-    private float speed = 500f;
+    private float speed = 800f;
     private Vector3 rotation;
     private Quaternion targetQuaternion;
     private ReadCube readCube;
     private CubeState cubeState;
+    private Automate automate;
+    private InGameUI ui;
+    
     
     [Header("Feedbacks Player")]
     [Tooltip("AUDIO>Cube Sfx should be added here to make the Sfx work")]
-    // use MoreMountain's scripting to add the MMFPlayer to script
-    [SerializeField] private MMF_Player SwishSfx;
+    [SerializeField] private MMF_Player Sfx;
        
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        ui = FindObjectOfType<InGameUI>();
+        automate = FindObjectOfType<Automate>();
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
         
-        SwishSfx = GameObject.Find("Cube Sfx").GetComponent<MMF_Player>();
-        // We initialize the Sfx here to be able to play it.
-        SwishSfx.Initialization();
+        // readies the sfx for use
+        Sfx = GameObject.Find("CubeMovement").GetComponent<MMF_Player>();
+        Sfx.Initialization();
     }
 
     // Late Update is called once per frame at the end
-    void LateUpdate()
+    private void LateUpdate()
     {
-        if (dragging && !autoRotating)
+        if (dragging && !autoRotating && !automate.shuffling && !ui.isPaused)
         {
-            // Debug.Log("First Click");
+            automate.shuffling = false;
             SpinSide(activeSide);
+            PlaySfx();
             if (Input.GetMouseButtonUp(0))
             {
                 // Debug.Log("Second Click");
@@ -53,7 +57,20 @@ public class   PivotRotation : MonoBehaviour
         if (autoRotating)
         {
             AutoRotate();
-        } 
+            PlaySfx();
+        }
+    }
+
+    private void Update()
+    {
+        if(automate.shuffling)
+        {
+            speed = 600f;
+        }
+        else
+        {
+            speed = 800f;
+        }
     }
 
     private void SpinSide(List<GameObject> side)
@@ -78,10 +95,10 @@ public class   PivotRotation : MonoBehaviour
         {
             rotation.z = (mouseOffset.x + mouseOffset.y) * sensitivity * -1;
         }
-        // if (side == cubeState.front)
-        // {
-        //     rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
-        // }
+        if (side == cubeState.front)
+        {
+            rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
+        }
         if (side == cubeState.back)
         {
             rotation.x = (mouseOffset.x + mouseOffset.y) * sensitivity * 1;
@@ -100,9 +117,7 @@ public class   PivotRotation : MonoBehaviour
         mouseRef = Input.mousePosition;
         dragging = true;
         // Create a vector to rotate around
-        localForward = Vector3.zero - side[4].transform.parent.transform.localPosition;
-        // This calls the PlaySfx when the player rotates a face of the cube.
-        PlaySfx();
+        localForward = Vector3.zero - side[4].transform.localPosition;
     }
 
     public void StartAutoRotate(List<GameObject> side, float angle)
@@ -112,8 +127,6 @@ public class   PivotRotation : MonoBehaviour
         targetQuaternion = Quaternion.AngleAxis(angle, localForward) * transform.localRotation;
         activeSide = side;
         autoRotating = true;
-        // This calls the PlaySfx when the player rotates a face of the cube.
-        PlaySfx();
     }
 
 
@@ -151,11 +164,13 @@ public class   PivotRotation : MonoBehaviour
             autoRotating = false;
             dragging = false;                                                               
         }
-    }
+    }     
     
-    // Audio Scripts ~RA
+    
+    #region Audio Methods
     public void PlaySfx()
     {
-        SwishSfx.PlayFeedbacks(); 
+        Sfx.PlayFeedbacks();
     }
+    #endregion
 }
