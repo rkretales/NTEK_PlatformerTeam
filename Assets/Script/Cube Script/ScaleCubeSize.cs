@@ -4,19 +4,37 @@ using UnityEngine;
 
 public class ScaleCubeSize : MonoBehaviour
 {
-    private float sHeight;
-    private float sWidth;
-    private void Start()
+    public float targetWidth = 1080f; // Set the target width for scaling
+    public float targetHeight = 1920f; // Set the target height for scaling
+    public float maxScaleFactor = 1.5f; // Adjust this value to control the maximum scale
+
+    void Start()
     {
-        float targetScreenWidth = 1920f; // Set your target screen width
-        float targetScreenHeight = 1080f; // Set your target screen height
+        ScaleObject();
+    }
 
-        float currentScreenWidth = Screen.width;
-        float currentScreenHeight = Screen.height;
+    void ScaleObject()
+    {
+        float screenWidth = Screen.width;
+        float screenHeight = Screen.height;
+        float screenAspect = screenWidth / screenHeight;
 
-        float scaleX = currentScreenWidth / targetScreenWidth;
-        float scaleY = currentScreenHeight / targetScreenHeight;
+        float targetAspect = targetWidth / targetHeight;
 
-        transform.localScale = new Vector3(scaleX, scaleY, 1f);
+        float scale;
+
+        if (screenAspect > targetAspect)
+        {
+            // Landscape orientation
+            scale = targetWidth / screenWidth;
+        }
+        else
+        {
+            // Portrait orientation
+            scale = targetHeight / screenHeight;
+        }
+
+        scale *= maxScaleFactor;
+        transform.localScale = new Vector3(scale, scale, scale);
     }
 }
