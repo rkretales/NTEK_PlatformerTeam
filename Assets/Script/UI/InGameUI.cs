@@ -9,8 +9,10 @@ public class InGameUI : MonoBehaviour
     [SerializeField]private GameObject pauseScreenHolder;
     [SerializeField]private GameObject optionsHolder;
     public bool isPaused;
+    
     public void Restart()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void OpenPauseMenu()

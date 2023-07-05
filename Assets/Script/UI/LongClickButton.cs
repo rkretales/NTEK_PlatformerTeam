@@ -6,7 +6,6 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 {
     public UnityEvent onLongPress;
     [SerializeField] private float longPressDuration = 3f;
-
     private bool isPressed;
     private float pressTime;
     private InGameUI ui;
@@ -24,6 +23,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private void Update()
     {
+        Debug.Log(isPressed);
         if (isPressed && Time.time - pressTime >= longPressDuration)
         {
             if (onLongPress != null)
