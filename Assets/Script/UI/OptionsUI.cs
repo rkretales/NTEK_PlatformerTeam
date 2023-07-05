@@ -22,15 +22,14 @@ public class OptionsUI : MonoBehaviour {
 
     private MMSoundManager _soundManager;
 
-    private void Start() {
+    private void Start() 
+    {
         Application.targetFrameRate = SaveMaster.GetInt("FPSLimitValue");
         QualitySettings.SetQualityLevel(SaveMaster.GetInt("qualityValue"));
         _soundManager = FindObjectOfType(typeof(MMSoundManager)) as MMSoundManager;
         masterVolumeSlider.value = SaveMaster.GetFloat(key: "MasterVolume");
         sfxVolumeSlider.value = SaveMaster.GetFloat(key: "SfxVolume");
         musicVolumeSlider.value = SaveMaster.GetFloat(key: "MusicVolume");
-
-        
     }
 
     private void SaveVolumeSettings()

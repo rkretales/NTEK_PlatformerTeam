@@ -5214,7 +5214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e8797db0bb3e24cb7fdccac0499561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenuUI: {fileID: 417552302}
+  MainMenuUI: {fileID: 10591953}
   OptionsUIHolder: {fileID: 1580322412}
   audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
   FPSLimit:
@@ -7815,9 +7815,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 800761101}
-        m_TargetAssemblyTypeName: InGameUI, Assembly-CSharp
-        m_MethodName: CloseOptions
+      - m_Target: {fileID: 800761104}
+        m_TargetAssemblyTypeName: OptionsUI, Assembly-CSharp
+        m_MethodName: OptionReturn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
