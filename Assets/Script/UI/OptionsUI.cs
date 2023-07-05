@@ -33,7 +33,7 @@ public class OptionsUI : MonoBehaviour {
         
     }
 
-    private void SaveVolumeSettings()
+    public void SaveVolumeSettings()
     {
         SaveMaster.SetFloat("MasterVolume", masterVolumeSlider.value);
         SaveMaster.SetFloat("SfxVolume", sfxVolumeSlider.value);

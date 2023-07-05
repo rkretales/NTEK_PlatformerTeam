@@ -9,12 +9,19 @@ public class InGameUI : MonoBehaviour
     [SerializeField]private GameObject pauseScreenHolder;
     [SerializeField]private GameObject optionsHolder;
     public bool isPaused;
-    
+
     public void Restart()
     {
+        OptionsUI optionsUI = FindObjectOfType<OptionsUI>();
+        if (optionsUI != null)
+        {
+            optionsUI.SaveVolumeSettings(); // Save volume settings before restarting
+        }
+
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     public void OpenPauseMenu()
     {
         isPaused = true;
@@ -43,7 +50,13 @@ public class InGameUI : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        Debug.Log("The In-Game Scene has been unloaded and we are now in the MainMenu Scene");
+        OptionsUI optionsUI = FindObjectOfType<OptionsUI>();
+        if (optionsUI != null)
+        {
+            optionsUI.SaveVolumeSettings(); // Save volume settings before returning to the main menu
+        }
+
+        Debug.Log("The In-Game Scene has been unloaded, and we are now in the MainMenu Scene");
         SceneManager.LoadScene(0);
     }
 }
