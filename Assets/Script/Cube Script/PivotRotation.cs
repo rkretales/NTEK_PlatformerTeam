@@ -11,7 +11,7 @@ public class PivotRotation : MonoBehaviour
     private Vector3 localForward;
     private Vector3 mouseRef;
     private bool dragging = false;
-    private bool autoRotating = false;
+    public bool rotating = false;
     private float sensitivity = 0.4f;
     private float speed = 800f;
     private Vector3 rotation;
@@ -42,7 +42,7 @@ public class PivotRotation : MonoBehaviour
     // Late Update is called once per frame at the end
     private void LateUpdate()
     {
-        if (dragging && !autoRotating && !automate.shuffling && !ui.isPaused)
+        if (dragging && !rotating && !automate.shuffling && !ui.isPaused && !CubeState.autoRotating)
         {
             SpinSide(activeSide);
             PlaySfx();
@@ -53,7 +53,7 @@ public class PivotRotation : MonoBehaviour
                 RotateToRightAngle();
             }
         }
-        if (autoRotating)
+        if (rotating)
         {
             AutoRotate();
             PlaySfx();
@@ -125,7 +125,7 @@ public class PivotRotation : MonoBehaviour
         Vector3 localForward = Vector3.zero - side[4].transform.parent.transform.localPosition;
         targetQuaternion = Quaternion.AngleAxis(angle, localForward) * transform.localRotation;
         activeSide = side;
-        autoRotating = true;
+        rotating = true;
     }
 
 
@@ -138,7 +138,7 @@ public class PivotRotation : MonoBehaviour
         vec.z = Mathf.Round(vec.z / 90) * 90;
 
         targetQuaternion.eulerAngles = vec;
-        autoRotating = true;
+        rotating = true;
     }
 
     private void AutoRotate()
@@ -160,7 +160,7 @@ public class PivotRotation : MonoBehaviour
             cubeState.PutDown(activeSide, transform.parent);
             readCube.ReadState();
             CubeState.autoRotating = false;
-            autoRotating = false;
+            rotating = false;
             dragging = false;                                                               
         }
     }     

@@ -6,6 +6,7 @@ public class SelectFace : MonoBehaviour
 {
     private CubeState cubeState;
     private ReadCube readCube;
+    private PivotRotation pivotRotation;
     private InGameUI ui;
     private int layerMask = 1 << 0;
 
@@ -13,6 +14,7 @@ public class SelectFace : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
+        pivotRotation = FindObjectOfType<PivotRotation>();
         ui = FindObjectOfType<InGameUI>();
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
@@ -21,7 +23,7 @@ public class SelectFace : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !CubeState.autoRotating && !ui.isPaused)
+        if (Input.GetMouseButtonDown(0) && !CubeState.autoRotating && !ui.isPaused && !pivotRotation.rotating)
         {
             // read the current state of the cube
             // Debug.Log("Select click!");            
@@ -47,7 +49,7 @@ public class SelectFace : MonoBehaviour
                 // If the face hit exists within a side
                 foreach (List<GameObject> cubeSide in cubeSides)
                 {
-                    if (cubeSide.Contains(face))
+                    if (cubeSide.Contains(face) && !CubeState.autoRotating && !pivotRotation.rotating)
                     {
                         //Pick it up
                         cubeState.PickUp(cubeSide);

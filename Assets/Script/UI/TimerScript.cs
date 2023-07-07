@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Lowscope.Saving;
 
 public class TimerScript : MonoBehaviour
 {
     public TMPro.TMP_Text TimerText;
-    private float currentTime;
+    public float currentTime;
     public GameObject startButton;
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,7 @@ public class TimerScript : MonoBehaviour
             TimeSpan time = TimeSpan.FromSeconds(currentTime);
 
             TimerText.text = time.ToString(@"mm\:ss\:ff");
+            SaveMaster.SetFloat("CurrentTime", currentTime);
         }
     }
 }
