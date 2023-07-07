@@ -15,6 +15,7 @@ public class Automate : MonoBehaviour
     private ReadCube readCube;
     public bool shuffling;
     private bool Once = true;
+    public bool shuffled;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class Automate : MonoBehaviour
 
     public void Shuffle()
     {
+        shuffled = true;
         shuffling = true;
         List<string> moves = new List<string>();
         int shuffleLength = Random.Range(10, 30);

@@ -6,7 +6,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 {
     public UnityEvent onLongPress;
     [SerializeField] private float longPressDuration = 3f;
-    private bool isPressed;
+    public bool isPressed;
     private float pressTime;
     private InGameUI ui;
 
