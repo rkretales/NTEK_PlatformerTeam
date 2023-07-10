@@ -18,6 +18,7 @@ public class NTEKSceneLoader : MonoBehaviour {
     }
 
     private IEnumerator EnterLoadingScene() {
+        Time.timeScale = 1;
         MMFadeInEvent.Trigger(fadeDuration, _tween);
         yield return new WaitForSeconds(fadeDuration);
         NTEKSceneLoadingManager.LoadScene(sceneToLoad, loadingSceneName);
