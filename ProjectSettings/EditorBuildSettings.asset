@@ -9,12 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MVP/MainMenu.unity
     guid: 62c72487dc81eb541adb6613c8c8c78d
   - enabled: 1
-    path: Assets/Scenes/MVP/LoadingScreen.unity
-    guid: 4e592591c9710db47a987acfb40b0471
-  - enabled: 1
     path: Assets/Scenes/MVP/In-Game.unity
     guid: 66693a65a50917240a81d78d095abadb
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/MVP/WinningScene.unity
+    guid: cc0901eeacf3b1947bceb152cc036857
+  - enabled: 1
     path: Assets/Scenes/MVP/LoadingScreen.unity
     guid: 4e592591c9710db47a987acfb40b0471
   m_configObjects: {}

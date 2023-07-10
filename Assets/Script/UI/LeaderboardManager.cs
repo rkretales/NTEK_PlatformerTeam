@@ -31,7 +31,12 @@ public class LeaderboardManager : MonoBehaviour
             highscores = JsonUtility.FromJson<HighScores>(jsonString);
         }
 
-        AddHighScoreEntry(3, "ABC", highscores);
+        HighScoreEntry highScoreEntry = new HighScoreEntry
+        {
+            name = SaveMaster.GetString("PlayerName"),
+            time = SaveMaster.GetFloat("CurrentTime")
+        };
+        AddHighScoreEntry(highScoreEntry.time, highScoreEntry.name, highscores);
 
         // Sorting the list from lowest to highest time
         for (int i = 0; i < highscores.highScoreEntryList.Count; i++)
@@ -47,18 +52,25 @@ public class LeaderboardManager : MonoBehaviour
                 }
             }
         }
+
+        if (highscores.highScoreEntryList.Count > 7)
+        {
+            for (int h = highscores.highScoreEntryList.Count; h>7; h--)
+            {
+                highscores.highScoreEntryList.RemoveAt(7);
+            }
+        }
     
         highscoreEntryTransformList = new List<Transform>();
         foreach (HighScoreEntry highscoreEntry in highscores.highScoreEntryList)
         {
             CreateHighScoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
         }
+    }
 
-            highscoreEntryTransformList = new List<Transform>();
-            foreach (HighScoreEntry highscoreEntry in highscores.highScoreEntryList)
-            {
-                CreateHighScoreEntryTransform(highscoreEntry, entryContainer, highscoreEntryTransformList);
-            }
+    public void GetName(string name)
+    {
+        SaveMaster.SetString("PlayerName", name);
     }
 
     private void CreateHighScoreEntryTransform(HighScoreEntry highScoreEntry, Transform container, List<Transform> transformList)
@@ -115,6 +127,14 @@ public class LeaderboardManager : MonoBehaviour
 
         // Add new entry to Highscores
         highscores.highScoreEntryList.Add(highScoreEntry);
+
+        if (highscores.highScoreEntryList.Count > 7)
+        {
+            for (int h = highscores.highScoreEntryList.Count; h>7; h--)
+            {
+                highscores.highScoreEntryList.RemoveAt(7);
+            }
+        }
 
         // Save Updated HighScores
         string json = JsonUtility.ToJson(highscores);
