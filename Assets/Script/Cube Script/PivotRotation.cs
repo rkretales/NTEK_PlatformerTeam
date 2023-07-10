@@ -51,6 +51,7 @@ public class PivotRotation : MonoBehaviour
                 // Debug.Log("Second Click");
                 dragging = false;
                 RotateToRightAngle();
+                readCube.ReadState();
             }
         }
         if (rotating)
