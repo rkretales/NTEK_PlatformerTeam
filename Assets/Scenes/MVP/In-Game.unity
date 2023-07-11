@@ -153,10 +153,9 @@ RectTransform:
   m_Children:
   - {fileID: 1607842633}
   - {fileID: 1580032762}
-  - {fileID: 1580322413}
   - {fileID: 417552303}
   m_Father: {fileID: 738960516}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -463,7 +462,7 @@ RectTransform:
   m_Children:
   - {fileID: 497610565}
   m_Father: {fileID: 738960516}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2009,7 +2008,7 @@ RectTransform:
   - {fileID: 1294230496}
   - {fileID: 1155172752}
   m_Father: {fileID: 10591954}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4672,6 +4671,7 @@ RectTransform:
   - {fileID: 1072816024}
   - {fileID: 1479840345}
   - {fileID: 1909598063}
+  - {fileID: 1580322413}
   - {fileID: 10591954}
   - {fileID: 63123842}
   - {fileID: 897802678}
@@ -5068,7 +5068,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseScreenHolder: {fileID: 10591953}
-  optionsHolder: {fileID: 1294230495}
+  optionsHolder: {fileID: 1580322412}
   isPaused: 0
 --- !u!114 &800761102
 MonoBehaviour:
@@ -5112,7 +5112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e8797db0bb3e24cb7fdccac0499561, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainMenuUI: {fileID: 10591953}
+  MainMenuUI: {fileID: 417552302}
   OptionsUIHolder: {fileID: 1580322412}
   audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
   FPSLimit:
@@ -5225,7 +5225,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 738960516}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &928993329
 GameObject:
@@ -6507,32 +6507,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1085246660}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f6a0577d46b80a4f929e57370c60650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TargetCamera: {fileID: 2006416621}
-  HorizontalAxisEnabled: 1
-  VerticalAxisEnabled: 1
+  HorizontalAxisEnabled: 0
+  VerticalAxisEnabled: 0
   MaxRangeMode: 0
   MaxRange: 60
   MaxRangeTransform: {fileID: 0}
   JoystickValue:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CubeMapRotation, TestScripts
-        m_MethodName: Move
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   JoystickNormalizedValue:
     m_PersistentCalls:
       m_Calls: []
@@ -7300,10 +7288,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1580322412}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 800761101}
+        m_TargetAssemblyTypeName: InGameUI, Assembly-CSharp
+        m_MethodName: OpenOptions
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7660,10 +7648,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1580322412}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 800761101}
+        m_TargetAssemblyTypeName: InGameUI, Assembly-CSharp
+        m_MethodName: CloseOptions
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9483,8 +9471,8 @@ RectTransform:
   - {fileID: 73817624}
   - {fileID: 952758267}
   - {fileID: 718210351}
-  m_Father: {fileID: 10591954}
-  m_RootOrder: 2
+  m_Father: {fileID: 738960516}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
