@@ -5114,12 +5114,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenuUI: {fileID: 10591953}
   OptionsUIHolder: {fileID: 1580322412}
-  audioMixer: {fileID: 0}
-  FPSLimit: []
-  graphicsQuality: []
-  masterVolumeSlider: {fileID: 0}
-  sfxVolumeSlider: {fileID: 0}
-  musicVolumeSlider: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: 7e984f512e89b60468e829489e8883e3, type: 2}
+  FPSLimit:
+  - {fileID: 198774492}
+  - {fileID: 1784957540}
+  graphicsQuality:
+  - {fileID: 1556567828}
+  - {fileID: 1069857924}
+  - {fileID: 1741316117}
+  masterVolumeSlider: {fileID: 278960971}
+  sfxVolumeSlider: {fileID: 783137049}
+  musicVolumeSlider: {fileID: 289652977}
 --- !u!1 &822421462
 GameObject:
   m_ObjectHideFlags: 0

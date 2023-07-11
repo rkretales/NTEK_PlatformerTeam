@@ -21,7 +21,6 @@ public class PivotRotation : MonoBehaviour
     private Automate automate;
     private InGameUI ui;
     
-    
     [Header("Feedbacks Player")]
     [Tooltip("AUDIO>Cube Sfx should be added here to make the Sfx work")]
     [SerializeField] private MMF_Player Sfx;
@@ -58,6 +57,7 @@ public class PivotRotation : MonoBehaviour
         {
             AutoRotate();
             PlaySfx();
+            readCube.ReadState();
         }
     }
 
@@ -110,6 +110,7 @@ public class PivotRotation : MonoBehaviour
         mouseRef = Input.mousePosition;
     }
 
+    
          
     public void Rotate(List<GameObject> side)
     {

@@ -23,7 +23,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     private void Update()
     {
-        Debug.Log(isPressed);
+        // Debug.Log(isPressed);
         if (isPressed && Time.time - pressTime >= longPressDuration)
         {
             if (onLongPress != null)

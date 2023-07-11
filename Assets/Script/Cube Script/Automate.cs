@@ -69,6 +69,7 @@ public class Automate : MonoBehaviour
     {
         Invoke("Delayer", 0.4f);
         CubeState.autoRotating = true;
+        readCube.ReadState();
         shuffling = true;
         if (move == "U")
         {
@@ -142,7 +143,6 @@ public class Automate : MonoBehaviour
         {
             RotateSide(cubeState.back, -180);
         }
-        readCube.ReadState();
     }
 
 
