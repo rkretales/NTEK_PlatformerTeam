@@ -6676,6 +6676,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MainMenuUIHolder: {fileID: 483872806}
   OptionsUIHolder: {fileID: 238342795}
+  _soundManager: {fileID: 0}
+  masterVolumeSlider: {fileID: 183953425}
+  sfxVolumeSlider: {fileID: 1269435047}
+  musicVolumeSlider: {fileID: 2112066713}
 --- !u!1 &2003691994
 GameObject:
   m_ObjectHideFlags: 0
