@@ -55,7 +55,7 @@ public class SelectFace : MonoBehaviour
                 {
                     if (cubeSide.Contains(face))
                     {
-                        Debug.Log(face);
+                        // Debug.Log(face);
                         // Pick it up
                         cubeState.PickUp(cubeSide);
                         // Start the side rotation logic
