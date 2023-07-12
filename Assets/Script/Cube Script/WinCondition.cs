@@ -38,7 +38,7 @@ public class WinCondition : MonoBehaviour
 
     private bool CheckWinCondition()
     {
-        Color upColor = GetColorOfPiece(cubeState.up[0]);
+        Color upColor = GetColorOfPiece(cubeState.up[4]);
 
         if (automate.shuffled && longClick.isPressed)
         {
@@ -51,7 +51,7 @@ public class WinCondition : MonoBehaviour
                 }
             }
 
-            Color downColor = GetColorOfPiece(cubeState.down[0]);
+            Color downColor = GetColorOfPiece(cubeState.down[4]);
 
             // Check if all pieces of the "down" side have the same color
             foreach (GameObject piece in cubeState.down)
@@ -62,7 +62,7 @@ public class WinCondition : MonoBehaviour
                 }
             }
 
-            Color leftColor = GetColorOfPiece(cubeState.left[0]);
+            Color leftColor = GetColorOfPiece(cubeState.left[4]);
 
             // Check if all pieces of the "left" side have the same color
             foreach (GameObject piece in cubeState.left)
@@ -73,7 +73,7 @@ public class WinCondition : MonoBehaviour
                 }
             }
 
-            Color rightColor = GetColorOfPiece(cubeState.right[0]);
+            Color rightColor = GetColorOfPiece(cubeState.right[4]);
 
             // Check if all pieces of the "right" side have the same color
             foreach (GameObject piece in cubeState.right)
@@ -84,7 +84,7 @@ public class WinCondition : MonoBehaviour
                 }
             }
 
-            Color frontColor = GetColorOfPiece(cubeState.front[0]);
+            Color frontColor = GetColorOfPiece(cubeState.front[4]);
 
             // Check if all pieces of the "front" side have the same color
             foreach (GameObject piece in cubeState.front)
@@ -95,7 +95,7 @@ public class WinCondition : MonoBehaviour
                 }
             }
 
-            Color backColor = GetColorOfPiece(cubeState.back[0]);
+            Color backColor = GetColorOfPiece(cubeState.back[4]);
 
             // Check if all pieces of the "back" side have the same color
             foreach (GameObject piece in cubeState.back)

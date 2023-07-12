@@ -20,6 +20,7 @@ public class Automate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Shuffle();
         cubeState = FindObjectOfType<CubeState>();
         readCube = FindObjectOfType<ReadCube>();
     }
@@ -27,7 +28,6 @@ public class Automate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(shuffling);
         if (moveList.Count > 0  && !CubeState.autoRotating && CubeState.started && Once)
         {
             Once = false;
@@ -42,10 +42,9 @@ public class Automate : MonoBehaviour
         {
             shuffling = false;
         }
-        
     }
 
-    public void Shuffle()
+    private void Shuffle()
     {
         shuffled = true;
         shuffling = true;
