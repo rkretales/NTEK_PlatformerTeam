@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,7 +22,7 @@ public class ReadCube : MonoBehaviour
     CubeMap cubeMap;
     public GameObject emptyGO;
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         SetRayTransform();
 
@@ -35,13 +35,12 @@ public class ReadCube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ReadState()
     {
         cubeState = FindObjectOfType<CubeState>();
-        cubeMap = FindObjectOfType<CubeMap>();
 
         // set the state of each position in the list of sides so we know
         // what color is in what position
@@ -53,12 +52,11 @@ public class ReadCube : MonoBehaviour
         cubeState.right = ReadFace(rightRays, rightRay);
 
         // update the map with the found positions
-        cubeMap.Set();
         // Debug.Log("Read!");
 
     }
 
-    void SetRayTransform()
+    private void SetRayTransform()
     {
         // populate the ray lists ith raycasts eminating from the transform, angled towars the cube
         frontRays = BuildRays(frontRay, new Vector3(0, 90, 0));
@@ -121,6 +119,4 @@ public class ReadCube : MonoBehaviour
 
         return facesHit;
     }
-
-
 }

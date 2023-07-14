@@ -6,24 +6,32 @@ public class SelectFace : MonoBehaviour
 {
     private CubeState cubeState;
     private ReadCube readCube;
+    private PivotRotation pivotRotation;
+    private InGameUI ui;
+    private bool faceSelecting = false;
     private int layerMask = 1 << 0;
 
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        pivotRotation = FindObjectOfType<PivotRotation>();
+        ui = FindObjectOfType<InGameUI>();
         readCube = FindObjectOfType<ReadCube>();
         cubeState = FindObjectOfType<CubeState>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !CubeState.autoRotating)
+        if (!faceSelecting && Input.GetMouseButtonDown(0) && !CubeState.autoRotating && !ui.isPaused && !pivotRotation.rotating)
         {
             // read the current state of the cube
             // Debug.Log("Select click!");            
             readCube.ReadState();
+
+            // Set faceSelecting to true to prevent multiple selections
+            faceSelecting = true;
 
             // raycast from the mouse towards the cube to see if a face is hit  
             RaycastHit hit;
@@ -47,14 +55,18 @@ public class SelectFace : MonoBehaviour
                 {
                     if (cubeSide.Contains(face))
                     {
-                        //Pick it up
+                        // Debug.Log(face);
+                        // Pick it up
                         cubeState.PickUp(cubeSide);
-                        // Debug.Log("Pick Click");
-                        //start the side rotation logic
+                        // Start the side rotation logic
                         cubeSide[4].transform.parent.GetComponent<PivotRotation>().Rotate(cubeSide);
                     }
                 }
             }
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            faceSelecting = false;
         }
     }
 }
